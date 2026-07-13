@@ -1,0 +1,35 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+spring:
+  main:
+    banner-mode: "off"
+
+  datasource:
+    url: jdbc:h2:mem:switchn_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+jwt:
+  secret: switchn-secret-key-2024-secure-jwt-token-generation
+  expiration: 86400000
+
+firebase:
+  # Update with your Firebase config
+  project-id: switchn-clone

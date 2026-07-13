@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "474672548117",
+    "project_id": "switchn-clone",
+    "storage_bucket": "switchn-clone.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474672548117:android:1aa766ebf8d54d20f3c11c",
+        "android_client_info": {
+          "package_name": "com.example.switchn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTlRmB7JWZpfjZDoVQLDTxcvcmJqAT0TE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

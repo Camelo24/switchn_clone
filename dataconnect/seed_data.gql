@@ -1,0 +1,106 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This is seed data and can be populated by anyone.") {
+  user_insertMany(data: [
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      phoneNumber: "111-222-3333",
+      firstName: "Alice",
+      lastName: "Smith",
+      createdAt: "2023-01-01T10:00:00Z"
+    },
+    {
+      id: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      phoneNumber: "444-555-6666",
+      firstName: "Bob",
+      lastName: "Johnson",
+      createdAt: "2023-01-02T11:00:00Z"
+    }
+  ])
+  operator_insertMany(data: [
+    {
+      id: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      name: "Telecom Inc.",
+      code: "TINC",
+      country: "USA",
+      createdAt: "2023-01-03T12:00:00Z"
+    },
+    {
+      id: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      name: "Global Bank",
+      code: "GLB",
+      country: "USA",
+      createdAt: "2023-01-04T13:00:00Z"
+    }
+  ])
+  account_insertMany(data: [
+    {
+      id: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      accountName: "Alice Checking",
+      accountNumber: "123456789",
+      operatorId: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      accountType: "Checking",
+      balance: 1000.00,
+      createdAt: "2023-01-05T14:00:00Z"
+    },
+    {
+      id: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      accountName: "Bob Savings",
+      accountNumber: "987654321",
+      operatorId: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      userId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      accountType: "Savings",
+      balance: 2500.50,
+      createdAt: "2023-01-06T15:00:00Z"
+    }
+  ])
+  transaction_insertMany(data: [
+    {
+      id: "06eebc99-9c0b-4ef8-bb6d-6bb9bd380a77",
+      senderAccountId: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      receiverAccountId: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      amount: 50.00,
+      currency: "USD",
+      transactionType: "Transfer",
+      status: "Completed",
+      createdAt: "2023-01-07T16:00:00Z",
+      senderId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      receiverId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      referenceNumber: "TRN001",
+      description: "Payment for goods",
+      feeAmount: 0.50
+    },
+    {
+      id: "17eebc99-9c0b-4ef8-bb6d-6bb9bd380a88",
+      senderAccountId: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      amount: 25.00,
+      currency: "USD",
+      transactionType: "Withdrawal",
+      status: "Completed",
+      createdAt: "2023-01-08T17:00:00Z",
+      senderId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      referenceNumber: "WDL001",
+      description: "Cash withdrawal",
+      feeAmount: 0.25
+    }
+  ])
+  billPaymentService_insertMany(data: [
+    {
+      id: "28eebc99-9c0b-4ef8-bb6d-6bb9bd380a99",
+      serviceName: "Electricity Bill",
+      providerName: "PowerCo",
+      serviceType: "Utility",
+      createdAt: "2023-01-09T18:00:00Z",
+      instructions: "Pay before due date",
+      logoUrl: "https://example.com/powerco.png"
+    },
+    {
+      id: "39eebc99-9c0b-4ef8-bb6d-6bb9bd380aaa",
+      serviceName: "Internet Service",
+      providerName: "NetConnect",
+      serviceType: "Communication",
+      createdAt: "2023-01-10T19:00:00Z",
+      instructions: "Automatic payment",
+      logoUrl: "https://example.com/netconnect.png"
+    }
+  ])
+}

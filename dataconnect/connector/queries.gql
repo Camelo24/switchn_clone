@@ -1,0 +1,18 @@
+# Fetches the user's balances AND their transaction history in one request
+query GetDashboardData($uid: String!) @auth(level: USER) {
+  profile(id: $uid) {
+    momoBalance
+    omBalance
+    # Because we linked the tables in the schema, SQL Connect automatically
+    # lets us fetch nested transactions!
+    transactions_on_user(orderBy: [{ createdAt: DESC }]) {
+      id
+      type
+      source
+      dest
+      amount
+      status
+      createdAt
+    }
+  }
+}

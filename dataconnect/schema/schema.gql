@@ -1,0 +1,73 @@
+type User @table {
+  # Automatically becomes the primary key. We will pass the Firebase Auth UID here.
+  id: String!
+
+  phoneNumber: String!
+  firstName: String!
+  lastName: String!
+  email: String
+  dateOfBirth: Date
+  nationalIdNumber: String
+
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Account @table {
+  # Implicit primary key with Firebase's UUID generator
+  id: UUID! @default(expr: "uuidV4()")
+
+  # Foreign Keys
+  user: User!
+  operator: Operator!
+
+  accountName: String!
+  accountNumber: String!
+  accountType: String!
+
+  balance: Float! @default(value: 0.0)
+
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Transaction @table {
+  id: UUID! @default(expr: "uuidV4()")
+
+  senderAccount: Account!
+  receiverAccount: Account
+  sender: User
+  receiver: User
+
+  amount: Float!
+  feeAmount: Float @default(value: 0.0)
+  currency: String!
+  transactionType: String!
+  status: String! @default(value: "Pending")
+  referenceNumber: String
+  description: String
+
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Operator @table {
+  id: UUID! @default(expr: "uuidV4()")
+
+  name: String!
+  code: String!
+  country: String!
+  logoUrl: String
+  supportEmail: String
+
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type BillPaymentService @table {
+  id: UUID! @default(expr: "uuidV4()")
+
+  serviceName: String!
+  providerName: String!
+  serviceType: String!
+  instructions: String
+  logoUrl: String
+
+  createdAt: Timestamp! @default(expr: "request.time")
+}

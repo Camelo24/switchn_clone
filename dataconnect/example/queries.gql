@@ -1,0 +1,47 @@
+query ListAllOperators @auth(level: PUBLIC) {
+  operators {
+    id
+    name
+    code
+    country
+    logoUrl
+  }
+}
+
+query GetUserAccounts @auth(level: USER) {
+  # Fix: We use { eq: "auth.uid" } to evaluate the currently logged-in Firebase User ID
+  accounts(where: { user: { id: { eq: "auth.uid" } } }) {
+    id
+    accountName
+    accountNumber
+    accountType
+    balance
+    operator {
+      name
+      code
+    }
+  }
+}
+
+mutation CreateBillPaymentService($serviceName: String!, $providerName: String!, $serviceType: String!, $instructions: String, $logoUrl: String) @auth(level: USER) {
+  billPaymentService_insert(data: {
+    serviceName: $serviceName,
+    providerName: $providerName,
+    serviceType: $serviceType,
+    instructions: $instructions,
+    logoUrl: $logoUrl
+    # Removed createdAt_expr since schema handles it natively!
+  })
+}
+
+mutation RecordNewTransaction($senderAccountId: UUID!, $amount: Float!, $currency: String!, $transactionType: String!, $status: String!, $receiverAccountId: UUID) @auth(level: USER) {
+  transaction_insert(data: {
+    senderAccountId: $senderAccountId,
+    receiverAccountId: $receiverAccountId,
+    amount: $amount,
+    currency: $currency,
+    transactionType: $transactionType,
+    status: $status
+    # Removed createdAt_expr since schema handles it natively!
+  })
+}
